@@ -48,7 +48,7 @@ routes.get("/employees/:eid", async (req, res) => {
         } else {
             const employee = await EmployeeModel.findById(req.params.eid)
             if(!employee) {
-                res.status(404).send({ status: false, eid: employee.eid,  message: "Employee not found" })
+                res.status(404).send({ status: false,  message: "Employee not found" })
             } else {
                 res.status(200).send(employee)
             }

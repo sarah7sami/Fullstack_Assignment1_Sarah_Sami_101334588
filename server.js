@@ -9,8 +9,8 @@ const empRoutes = require('./routes/emp')
 
 
 const app = express()
-const SERVER_PORT = 8081
-const DB_CONNECTION_STRING = 'ENTER YOUR CONNECTION STRING HERE'
+const SERVER_PORT = 8080
+const DB_CONNECTION_STRING = 'mongodb+srv://pritamworld:1234567890@cluster0.helbwta.mongodb.net/comp3123_assigment1?retryWrites=true&w=majority'
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
