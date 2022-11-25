@@ -29,7 +29,7 @@ routes.post("/employees", async (req, res) => {
             const employee = new EmployeeModel(req.body)
             const existingEmail = await EmployeeModel.findOne({ email: req.body.email })
             if(existingEmail) {
-                res.status(400).send({ status: false, email: employee.email, message: "Email already exists" })
+                res.status(403).send({ status: false, email: employee.email, message: "Email already exists" })
             } else {
                 await employee.save()
                 res.status(201).send({ status: true, email: employee.email, message: "Employee added successfully"})
@@ -94,9 +94,9 @@ routes.delete("/employees", async (req, res) => {
         } else {
             const employee = await EmployeeModel.findByIdAndDelete(req.query.eid)
             if(employee) {
-                res.status(200).send({ status: true, email: employee.email, message: "Employee deleted successfully"})
+                res.status(204).send({ status: true, email: employee.email, message: "Employee deleted successfully"})
             } else {
-                res.status(400).send({ status: false, message: "Employee not found" })
+                res.status(404).send({ status: false, message: "Employee not found" })
             }
         }
     } catch (err) {
