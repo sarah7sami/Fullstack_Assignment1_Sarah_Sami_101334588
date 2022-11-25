@@ -16,7 +16,7 @@ routes.post("/signup", async (req, res) => {
             const user = new UserModel(req.body)
             const existingUser = await UserModel.findOne({$or: [{ email: req.body.email }, { username: req.body.username }]})
             if(existingUser) {
-                res.status(400).send({ status: false, message: "User already exists" })
+                res.status(403).send({ status: false, message: "User already exists" })
             } else {
                 await user.save()
                 res.status(201).send({ status: true, message: "User added successfully"})
@@ -41,7 +41,7 @@ routes.post("/login", async (req, res) => {
                 if(correctPassword) {
                     res.status(200).send({ status: true, user: user.username, message: "Login successful" })
                 } else {
-                    res.status(400).send({ status: false, message: "Invalid credentials" })
+                    res.status(401).send({ status: false, message: "Invalid credentials" })
                 }
             }
         }
